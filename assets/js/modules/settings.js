@@ -15,9 +15,7 @@ export class SettingsManager {
   load() {
     try {
       const saved = localStorage.getItem(this.storageKey);
-      if (saved) {
-        return JSON.parse(saved);
-      }
+      if (saved) return JSON.parse(saved);
     } catch (e) {
       console.error("Failed to load settings from storage", e);
     }
@@ -37,22 +35,22 @@ export class SettingsManager {
   }
 
   updateFromInputs(workMinutes, shortBreakMinutes, longBreakMinutes) {
-    // Fall back to standard defaults if empty, NaN, or <= 0
+    // Fall back to defaults if empty/invalid, and cap at max 999 minutes for safety
     const workSecs =
       workMinutes !== "" && !isNaN(workMinutes) && Number(workMinutes) > 0
-        ? Number(workMinutes)
+        ? Math.min(Number(workMinutes), 999)
         : 25;
     const shortSecs =
       shortBreakMinutes !== "" &&
       !isNaN(shortBreakMinutes) &&
       Number(shortBreakMinutes) > 0
-        ? Number(shortBreakMinutes)
+        ? Math.min(Number(shortBreakMinutes), 999)
         : 5;
     const longSecs =
       longBreakMinutes !== "" &&
       !isNaN(longBreakMinutes) &&
       Number(longBreakMinutes) > 0
-        ? Number(longBreakMinutes)
+        ? Math.min(Number(longBreakMinutes), 999)
         : 15;
 
     this.settings.modes.work.defaultTime = workSecs * 60;
