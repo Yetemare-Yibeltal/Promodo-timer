@@ -8,13 +8,21 @@
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/layout.css">
   <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/tasks.css">
+  <link rel="stylesheet" href="assets/css/analytics.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
   <link rel="stylesheet" href="assets/css/utilities.css">
 </head>
 <body>
   <div class="app-container">
     <header class="app-header">
       <h1>Promodo</h1>
-      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌙</button>
+      <div style="display: flex; gap: 0.5rem;">
+        <button id="ambientBtn" class="icon-btn" title="Toggle White Noise">🔊</button>
+        <button id="exportBtn" class="icon-btn" title="Export Data">💾</button>
+        <button id="settingsToggle" class="icon-btn" title="Settings">⚙️</button>
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌙</button>
+      </div>
     </header>
 
     <main class="app-main">
@@ -39,18 +47,46 @@
         </div>
       </section>
 
-      <section class="tasks-card">
-        <h2>Tasks</h2>
-        <div class="task-input-container">
-          <input type="text" id="taskInput" placeholder="What are you working on?" />
-          <button id="addTaskBtn" class="btn-primary">Add</button>
-        </div>
-        <ul id="taskList"></ul>
-      </section>
+      <div>
+        <section class="tasks-card">
+          <h2>Tasks</h2>
+          <div class="task-input-container">
+            <input type="text" id="taskInput" placeholder="What are you working on?" />
+            <button id="addTaskBtn" class="btn-primary">Add</button>
+          </div>
+          <ul id="taskList"></ul>
+        </section>
+
+        <section class="analytics-card">
+          <h2>Weekly Summary</h2>
+          <canvas id="analyticsChart" width="300" height="150" style="width: 100%; margin-top: 1rem;"></canvas>
+        </section>
+      </div>
     </main>
 
+    <div id="settingsModal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Preferences</h3>
+          <button id="closeSettings" class="icon-btn">✕</button>
+        </div>
+        <div class="form-group">
+          <label>Pomodoro (minutes)</label>
+          <input type="number" value="25" min="1" max="60" />
+        </div>
+        <div class="form-group">
+          <label>Short Break (minutes)</label>
+          <input type="number" value="5" min="1" max="30" />
+        </div>
+        <div class="form-group">
+          <label>Long Break (minutes)</label>
+          <input type="number" value="15" min="1" max="45" />
+        </div>
+      </div>
+    </div>
+
     <footer class="app-footer">
-      <p>&copy; 2026 Promodo Timer Workspace. Crafted for productivity.</p>
+      <p>&copy; 2026 Promodo Timer Workspace. Built with Vanilla Web Standards.</p>
     </footer>
   </div>
 
