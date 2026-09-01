@@ -1,25 +1,3 @@
-export class TimerManager {
-  constructor(config, onTick, onComplete) {
-    this.config = config;
-    this.onTick = onTick;
-    this.onComplete = onComplete;
-    this.currentMode = "work";
-    this.timeLeft = this.config.modes[this.currentMode].defaultTime;
-    this.isRunning = false;
-    this.timerId = null;
-  }
-
-  setMode(mode) {
-    this.currentMode = mode;
-    // Pull the latest defaultTime directly from the config object
-    this.timeLeft = this.config.modes[mode].defaultTime;
-    this.pause();
-    this.updateDisplay();
-  }
-
-  // ... rest of your timer methods ...
-}
-
 import { formatTime } from "../utils/time.js";
 
 export class TimerManager {
