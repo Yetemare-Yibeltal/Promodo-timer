@@ -44,7 +44,6 @@ export class TimerManager {
 
   reset() {
     this.pause();
-    // Pull the latest defaultTime from config (handles newly saved settings)
     this.totalDuration = this.config.modes[this.currentMode].defaultTime;
     this.timeRemaining = this.totalDuration;
     this.onTick(this.getFormattedTime(), this.getProgressPercentage());
@@ -55,13 +54,15 @@ export class TimerManager {
     const timeDisplayEl = document.getElementById("timeDisplay");
 
     if (timeDisplayEl) {
-      // Automatically adjust font sizing based on string length to prevent overflow
-      if (timeStr.length > 7) {
-        timeDisplayEl.style.fontSize = "2rem";
-      } else if (timeStr.length > 5) {
-        timeDisplayEl.style.fontSize = "2.5rem";
+      // Aggressive font scaling based on digit count
+      if (timeStr.length > 8) {
+        timeDisplayEl.style.fontSize = "1.2rem";
+      } else if (timeStr.length > 6) {
+        timeDisplayEl.style.fontSize = "1.8rem";
+      } else if (timeStr.length > 4) {
+        timeDisplayEl.style.fontSize = "2.4rem";
       } else {
-        timeDisplayEl.style.fontSize = "4.5rem";
+        timeDisplayEl.style.fontSize = "3.5rem";
       }
     }
 
