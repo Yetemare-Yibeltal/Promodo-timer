@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const addTaskBtn = $("#addTaskBtn");
   const taskList = $("#taskList");
 
+  const workDurationInput = $("#workDurationInput");
+  const shortBreakInput = $("#shortBreakInput");
+  const longBreakInput = $("#longBreakInput");
+  const saveSettingsBtn = $("#saveSettingsBtn");
+
   const chartCanvas = $("#analyticsChart");
   const chart = chartCanvas ? new AnalyticsChart(chartCanvas) : null;
 
@@ -41,6 +46,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const circumference = 2 * Math.PI * circleRadius;
 
   NotificationManager.requestPermission();
+
+  // Populate settings modal fields with current values on load
+  const syncSettingsInputs = () => {
+    const currentConfig = settings.get();
+    if (workDurationInput)
+      workDurationInput.value = currentConfig.modes.work.defaultTime / 60;
+    if (shortBreakInput)
+      shortBreakInput.value = currentConfig.modes.shortBreak.defaultTime / 60;
+    if (longBreakInput)
+      longBreakInput.value = currentConfig.modes.longBreak.defaultTime / 60;
+  };
+  syncSettingsInputs();
 
   const updateUI = (formattedTime, progressPercent) => {
     timeDisplay.textContent = formattedTime;
@@ -93,6 +110,19 @@ document.addEventListener("DOMContentLoaded", () => {
     startPauseBtn.textContent = "Start";
   });
 
+  if (saveSettingsBtn) {
+    saveSettingsBtn.addEventListener("click", () => {
+      settings.updateFromInputs(
+        workDurationInput.value,
+        shortBreakInput.value,
+        longBreakInput.value,
+      );
+      timer.config = settings.get();
+      timer.setMode(timer.currentMode);
+      settingsModal.close();
+    });
+  }
+
   themeToggle.addEventListener("click", () => {
     const current = document.documentElement.getAttribute("data-theme");
     const next = current === "dark" ? "light" : "dark";
@@ -107,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const renderTasks = () => {
+    if (!taskList) return;
     taskList.innerHTML = "";
     tasks.tasks.forEach((task) => {
       const li = document.createElement("li");
