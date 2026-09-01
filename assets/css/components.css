@@ -83,3 +83,13 @@
   font-weight: 600;
   border-radius: var(--radius-md);
 }
+.timer-display-time {
+  font-size: clamp(
+    2rem,
+    5vw,
+    4.5rem
+  ); /* Dynamically scales down based on viewport width */
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
