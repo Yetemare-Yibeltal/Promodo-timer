@@ -37,19 +37,27 @@ export class SettingsManager {
   }
 
   updateFromInputs(workMinutes, shortBreakMinutes, longBreakMinutes) {
-    const workSecs = parseInt(workMinutes, 10);
-    const shortSecs = parseInt(shortBreakMinutes, 10);
-    const longSecs = parseInt(longBreakMinutes, 10);
+    // Fall back to standard defaults if empty, NaN, or <= 0
+    const workSecs =
+      workMinutes !== "" && !isNaN(workMinutes) && Number(workMinutes) > 0
+        ? Number(workMinutes)
+        : 25;
+    const shortSecs =
+      shortBreakMinutes !== "" &&
+      !isNaN(shortBreakMinutes) &&
+      Number(shortBreakMinutes) > 0
+        ? Number(shortBreakMinutes)
+        : 5;
+    const longSecs =
+      longBreakMinutes !== "" &&
+      !isNaN(longBreakMinutes) &&
+      Number(longBreakMinutes) > 0
+        ? Number(longBreakMinutes)
+        : 15;
 
-    if (!isNaN(workSecs) && workSecs > 0) {
-      this.settings.modes.work.defaultTime = workSecs * 60;
-    }
-    if (!isNaN(shortSecs) && shortSecs > 0) {
-      this.settings.modes.shortBreak.defaultTime = shortSecs * 60;
-    }
-    if (!isNaN(longSecs) && longSecs > 0) {
-      this.settings.modes.longBreak.defaultTime = longSecs * 60;
-    }
+    this.settings.modes.work.defaultTime = workSecs * 60;
+    this.settings.modes.shortBreak.defaultTime = shortSecs * 60;
+    this.settings.modes.longBreak.defaultTime = longSecs * 60;
 
     this.save();
   }

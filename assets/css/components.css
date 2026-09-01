@@ -93,3 +93,34 @@
   text-align: center;
   white-space: nowrap;
 }
+.timer-circle-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.timer-circle-container svg {
+  width: 100%;
+  height: auto;
+  max-width: 260px;
+}
+
+.timer-display-time {
+  position: absolute;
+  font-size: clamp(
+    1.8rem,
+    4vw,
+    4rem
+  ); /* Fully responsive fluid scaling based on screen size */
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: -1px;
+  color: var(--text-primary, #ffffff);
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
