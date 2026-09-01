@@ -1,0 +1,28 @@
+.hidden {
+  display: none !important;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-accent {
+  color: var(--accent-active);
+}
+
+.icon-btn {
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  transition: background var(--transition-fast);
+}
+
+.icon-btn:hover {
+  background: var(--bg-tertiary);
+}
