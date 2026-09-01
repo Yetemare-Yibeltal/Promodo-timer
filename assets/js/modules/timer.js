@@ -44,6 +44,8 @@ export class TimerManager {
 
   reset() {
     this.pause();
+    // Pull the latest defaultTime from config (handles newly saved settings)
+    this.totalDuration = this.config.modes[this.currentMode].defaultTime;
     this.timeRemaining = this.totalDuration;
     this.onTick(this.getFormattedTime(), this.getProgressPercentage());
   }
