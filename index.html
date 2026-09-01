@@ -63,7 +63,17 @@
 
         <section class="analytics-card">
           <h2>Weekly Summary</h2>
-          <canvas id="analyticsChart" width="300" height="150" style="width: 100%; margin-top: 1rem;"></canvas>
+          <div class="analytics-stats" style="display: flex; justify-content: space-around; margin: 1rem 0; text-align: center;">
+            <div>
+              <span id="totalFocusStat" style="font-size: 1.25rem; font-weight: 700; display: block;">0h 0m</span>
+              <span class="text-muted" style="font-size: 0.75rem;">Total Focus</span>
+            </div>
+            <div>
+              <span id="sessionsCompletedStat" style="font-size: 1.25rem; font-weight: 700; display: block;">0</span>
+              <span class="text-muted" style="font-size: 0.75rem;">Sessions Done</span>
+            </div>
+          </div>
+          <canvas id="analyticsChart" width="300" height="150" style="width: 100%; margin-top: 0.5rem;"></canvas>
         </section>
       </div>
     </main>
@@ -99,20 +109,7 @@
       </div>
     </footer>
   </div>
-<section class="analytics-card">
-  <h2>Weekly Summary</h2>
-  <div class="analytics-stats" style="display: flex; justify-content: space-around; margin: 1rem 0; text-align: center;">
-    <div>
-      <span id="totalFocusStat" style="font-size: 1.25rem; font-weight: 700; display: block;">0h 0m</span>
-      <span class="text-muted" style="font-size: 0.75rem;">Total Focus</span>
-    </div>
-    <div>
-      <span id="sessionsCompletedStat" style="font-size: 1.25rem; font-weight: 700; display: block;">0</span>
-      <span class="text-muted" style="font-size: 0.75rem;">Sessions Done</span>
-    </div>
-  </div>
-  <canvas id="analyticsChart" width="300" height="150" style="width: 100%; margin-top: 0.5rem;"></canvas>
-</section>
+
   <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>
