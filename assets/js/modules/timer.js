@@ -51,7 +51,21 @@ export class TimerManager {
   }
 
   getFormattedTime() {
-    return formatTime(this.timeRemaining);
+    const timeStr = formatTime(this.timeRemaining);
+    const timeDisplayEl = document.getElementById("timeDisplay");
+
+    if (timeDisplayEl) {
+      // Automatically adjust font sizing based on string length to prevent overflow
+      if (timeStr.length > 7) {
+        timeDisplayEl.style.fontSize = "2rem";
+      } else if (timeStr.length > 5) {
+        timeDisplayEl.style.fontSize = "2.5rem";
+      } else {
+        timeDisplayEl.style.fontSize = "4.5rem";
+      }
+    }
+
+    return timeStr;
   }
 
   getProgressPercentage() {
